@@ -21,13 +21,6 @@ class Biblioteca {
         this.revistas = new ArrayList<>();
     }
 
-    public void agregarLibro(Libro libro) {
-        libros.add(libro);
-    }
-
-    public void agregarRevista(Revista revista) {
-        revistas.add(revista);
-    }
 
     public void prestarLibro(Usuario usuario, Libro libro) {
         if (libros.contains(libro) && libro.prestar() > 0) {
@@ -52,7 +45,7 @@ class Libro {
 
     public Libro(String titulo) {
         this.titulo = titulo;
-        this.copiasDisponibles = 1; // Puedes ajustar el número inicial de copias disponibles según tus necesidades
+        this.copiasDisponibles = 1;
     }
 
     public String getTitulo() {
@@ -75,7 +68,7 @@ class Revista {
 
     public Revista(String titulo) {
         this.titulo = titulo;
-        this.copiasDisponibles = 1; // Puedes ajustar el número inicial de copias disponibles según tus necesidades
+        this.copiasDisponibles = 1;
     }
 
     public String getTitulo() {
