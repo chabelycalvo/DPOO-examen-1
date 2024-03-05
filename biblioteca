@@ -1,0 +1,110 @@
+import java.util.ArrayList;
+
+class Usuario {
+    private String nombre;
+
+    public Usuario(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+}
+
+class Biblioteca {
+    private ArrayList<Libro> libros;
+    private ArrayList<Revista> revistas;
+
+    public Biblioteca() {
+        this.libros = new ArrayList<>();
+        this.revistas = new ArrayList<>();
+    }
+
+    public void agregarLibro(Libro libro) {
+        libros.add(libro);
+    }
+
+    public void agregarRevista(Revista revista) {
+        revistas.add(revista);
+    }
+
+    public void prestarLibro(Usuario usuario, Libro libro) {
+        if (libros.contains(libro) && libro.prestar() > 0) {
+            System.out.println(usuario.getNombre() + " se le ha prestado el libro: " + libro.getTitulo());
+        } else {
+            System.out.println("No hay suficientes copias para prestamo");
+        }
+    }
+
+    public void prestarRevista(Usuario usuario, Revista revista) {
+        if (revistas.contains(revista) && revista.prestar() > 0) {
+            System.out.println(usuario.getNombre() + " se le ha prestado la revista: " + revista.getTitulo());
+        } else {
+            System.out.println("No hay suficientes copias para prestamo ");
+        }
+    }
+}
+
+class Libro {
+    private String titulo;
+    private int copiasDisponibles;
+
+    public Libro(String titulo) {
+        this.titulo = titulo;
+        this.copiasDisponibles = 1; // Puedes ajustar el número inicial de copias disponibles según tus necesidades
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public int prestar() {
+        if (copiasDisponibles > 0) {
+            copiasDisponibles--;
+            return copiasDisponibles + 1;
+        } else {
+            return 0;
+        }
+    }
+}
+
+class Revista {
+    private String titulo;
+    private int copiasDisponibles;
+
+    public Revista(String titulo) {
+        this.titulo = titulo;
+        this.copiasDisponibles = 1; // Puedes ajustar el número inicial de copias disponibles según tus necesidades
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public int prestar() {
+        if (copiasDisponibles > 0) {
+            copiasDisponibles--;
+            return copiasDisponibles + 1;
+        } else {
+            return 0;
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Biblioteca biblioteca = new Biblioteca();
+
+        Libro libro = new Libro("La Odisea");
+        biblioteca.agregarLibro(libro);
+
+        Revista revista = new Revista("National Geographic");
+        biblioteca.agregarRevista(revista);
+
+        Usuario usuario = new Usuario("Juan Perez");
+
+        biblioteca.prestarLibro(usuario, libro);
+        biblioteca.prestarRevista(usuario, revista);
+    }
+}
